@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %} Home {% endblock %}
+{% load static %}
+
+{% block content %}
+
+<!--===============Banner================-->
+<section class="banner">
+    <div class="banner-text-item">
+        <div class="banner-heading">
+            <h1>Effortless car sharing, for a better world</h1>
+        </div>
+        <form method="GET" action="/search" class="form">
+            <input type="text" list="mylist" name="pickup" placeholder="Leaving From" required>
+            <input type="text" list="mylist" name="drop" placeholder="Going To" required>
+            <input type="date" class="date" name="date" required>
+            <!-- <input type="time" class="time" name="time" required> -->
+            <button type="submit" class="book">Search</button>
+        </form>
+    </div>
+</section>
+
+<!--=========Services===============-->
+<section class="services">
+    <div class="service-item">
+        <img src="https://res.cloudinary.com/dxssqb6l8/image/upload/v1605293634/tour-guide_onzla9.png">
+        <h2>rides at low prices</h2>
+    </div>
+    <div class="service-item">
+        <img src="https://res.cloudinary.com/dxssqb6l8/image/upload/v1605293738/reliability_jbpn4g.png">
+        <h2>Trust who you travel with</h2>
+    </div>
+    <div class="service-item">
+        <img src="https://res.cloudinary.com/dxssqb6l8/image/upload/v1605293635/experience_a3fduk.png">
+        <h2>Scroll, click, tap and go!</h2>
+    </div>
+    <div class="service-item">
+        <img src="https://res.cloudinary.com/dxssqb6l8/image/upload/v1605293634/feedback_s8z7d9.png">
+        <h2>98% Our Travelers are Happy</h2>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% block title %} Sign Up {% endblock %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    .signupContainer {
+        color: #384047;
+    }
+
+    .signupContainer form {
+        max-width: 300px;
+        margin: 20px auto;
+        padding: 20px 20px;
+        background: #f4f7f8;
+        border-radius: 8px;
+    }
+
+    .signupContainer a {
+        font-weight: 400;
+        text-decoration: none;
+    }
+
+    .signupContainer h1 {
+        margin: 10px 0 20px 0;
+        text-align: center;
+    }
+
+    .signupContainer input[type="text"],
+    .signupContainer input[type="password"],
+    .signupContainer input[type="date"],
+    .signupContainer input[type="datetime"],
+    .signupContainer input[type="email"],
+    .signupContainer input[type="number"],
+    .signupContainer input[type="search"],
+    .signupContainer input[type="tel"],
+    .signupContainer input[type="time"],
+    .signupContainer input[type="url"],
+    .signupContainer textarea,
+    .signupContainer select {
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        font-size: 16px;
+        height: auto;
+        margin: 0;
+        outline: 0;
+        padding: 15px;
+        width: 100%;
+        background-color: #e8eeef;
+        color: #606970;
+        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+        margin-bottom: 10px;
+    }
+
+    .signupContainer input[type="radio"],
+    .signupContainer input[type="checkbox"] {
+        margin: 0 4px 8px 0;
+    }
+
+    .signupContainer select {
+        padding: 6px;
+        height: 32px;
+        border-radius: 2px;
+    }
+
+    .signupContainer button {
+        padding: 19px 39px 18px 39px;
+        color: #FFF;
+        background-color: #4bc970;
+        font-size: 18px;
+        text-align: center;
+        font-style: normal;
+        border-radius: 5px;
+        width: 100%;
+        border: 1px solid #3ac162;
+        border-width: 1px 1px 3px;
+        box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+        margin-bottom: 10px;
+        cursor: pointer;
+    }
+
+    .signupContainer fieldset {
+        margin-bottom: 30px;
+        border: none;
+    }
+
+    .signupContainer label {
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    @media screen and (min-width: 480px) {
+        .signupContainer form {
+            max-width: 480px;
+        }
+    }
+</style>
+
+<div class="signupContainer">
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <h1>Sign Up</h1>
+
+        <!-- {% if messages %}
+        {% for message in messages %}
+        <div id="alert-message">
+            <div class="alert alert-{{message.tags}} alert-dismissible text-center" role="alert">
+                {{ message }}
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %} -->
+
+        {% for field in registration_form %}
+
+        <label>{{field.label_tag}}</label>
+        {{field}}
+        <br><br>
+
+        {% for error in field.errors %}
+        <p style="color: red;">{{error}}</p><br>
+        {% endfor %}
+
+        {% endfor %}
+
+        <a href="{% url 'login' %}">Already Registered? Log In</a>
+        <br><br><br>
+
+        <button type="submit" class="btn">Sign Up</button>
+    </form>
+</div>
+
+{% endblock %}

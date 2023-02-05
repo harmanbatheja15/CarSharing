@@ -1,0 +1,356 @@
+{% extends 'base.html' %}
+{% block title %} Search {% endblock %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    .main {
+        background-color: rgba(105, 105, 105, 0.2);
+    }
+
+    .searchBanner {
+        width: 100%;
+        height: 40vh;
+        text-align: center;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .searchBanner::before {
+        content: '';
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+
+    .banner-text-item {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .searchBanner .form {
+        flex: 1;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        min-width: 70%;
+        padding: 1rem 1.5rem;
+    }
+
+    .searchBanner input,
+    .searchBanner .date,
+    .searchBanner .book {
+        padding: 15px;
+        margin-right: 10px;
+        font-size: 18px;
+        border-radius: 5px;
+        outline: 0;
+        border: none;
+    }
+
+    .searchBanner input {
+        width: 40%;
+        flex: 1.5;
+    }
+
+    .searchBanner .date {
+        width: 20%;
+        flex: 1;
+    }
+
+    .searchBanner .time {
+        width: 20%;
+        flex: 1;
+    }
+
+    .searchBanner .book {
+        width: 20%;
+        flex: 1;
+    }
+
+    .searchBanner .book {
+        text-decoration: none;
+        color: #fff;
+        text-transform: uppercase;
+        padding: 15px;
+        cursor: pointer;
+        background-color: #3e92e6;
+        font-size: 16px;
+        font-weight: normal;
+        width: 15%;
+    }
+
+    /*  */
+
+    @media all and (max-width: 1172px) {
+
+        .banner-text-item .form input,
+        .banner-text-item .form .date,
+        .banner-text-item .form a {
+            flex: 1;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .banner-text-item .form input {
+            width: 60%;
+        }
+
+        .banner-text-item .form .date {
+            width: 30%;
+        }
+
+        .banner-text-item .form .book {
+            width: 10%;
+            font-size: 14px;
+        }
+    }
+
+    @media all and (max-width: 1414px) {
+        .banner-text-item .form input {
+            width: 40%;
+        }
+
+        .banner-text-item .form .date {
+            width: 30%;
+        }
+
+        .banner-text-item .form .book {
+            width: 20%;
+            font-size: 14px;
+        }
+    }
+
+    @media all and (max-width: 928px) {
+
+        .searchBanner .form input,
+        a {
+            font-size: 12px;
+        }
+    }
+
+    @media all and (max-width: 1173px) {
+        .searchBanner .form {
+            background-color: transparent;
+        }
+    }
+
+    @media all and (max-width: 767px) {
+
+        .banner-text-item {
+            margin-top: 0 !important;
+        }
+
+        .banner-text-item .form {
+            display: flex;
+            flex-flow: column wrap;
+        }
+
+        .banner-text-item .form input,
+        .banner-text-item .form .date,
+        .banner-text-item .form time {
+            width: 100%;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+        }
+
+        .banner-text-item .form .book {
+            width: 100%;
+        }
+
+        .banner-heading h1 {
+            font-size: 30px;
+        }
+
+        .searchBanner .form {
+            width: 90%;
+            background-color: #fff;
+            border: 1px solid lightgray;
+            border-radius: 10px;
+        }
+    }
+
+    /*  */
+
+    .line {
+        border-left: 3px solid #000;
+        height: 50px;
+    }
+
+    .mainContainer {
+        padding: 2rem 0.5rem;
+        color: #32325d;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+        margin: 0;
+    }
+
+    @media (min-width: 40rem) {
+        .mainContainer {
+            padding: 2rem;
+        }
+    }
+
+    .ridesContainer {
+        display: flex;
+        -webkit-display: box;
+        -moz-display: box;
+        -ms-display: flexbox;
+        -webkit-display: flex;
+        flex-wrap: wrap;
+        padding: 0;
+        margin: 0;
+    }
+
+    .ridesContainer .cards {
+        display: flex;
+        padding: 1rem;
+        margin-bottom: 2rem;
+        width: 100%;
+    }
+
+    @media (min-width: 40rem) {
+        .ridesContainer .cards {
+            width: 50%;
+        }
+    }
+
+    @media (min-width: 56rem) {
+        .ridesContainer .cards {
+            width: 33.3%;
+        }
+    }
+
+    .ridesContainer .cards .card-item {
+        display: flex;
+        flex-direction: column;
+        background-color: #fff;
+        width: 100%;
+        border-radius: 6px;
+        box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+        overflow: hidden;
+        transition: transform 0.5s;
+        -webkit-transition: transform 0.5s;
+    }
+
+    .ridesContainer .cards .card-item:hover {
+        transform: scale(1.02);
+        -webkit-transform: scale(1.02);
+    }
+
+    .ridesContainer .cards .card-info {
+        display: flex;
+        flex: 1 1 auto;
+        flex-direction: column;
+        padding: 1rem;
+        line-height: 1.5em;
+    }
+
+    .ridesContainer .cards .card-title {
+        font-size: 20px;
+        line-height: 1.1em;
+        color: #32325d;
+    }
+
+    .ridesContainer .cards .username {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 10px;
+        border-radius: 100px;
+        background-color: #fff;
+        box-shadow: 0px 1px 15px -6px rgba(0, 0, 0, 0.75);
+        display: flex;
+        align-items: center;
+    }
+
+    .ridesContainer .cards .bookBtn {
+        width: 130px;
+        padding: 10px;
+        background-color: #8080ff;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        border-radius: 100px;
+        border: none;
+        outline: none;
+        cursor: pointer;
+    }
+
+    .ridesContainer .cards .username img {
+        width: 60px;
+        border-radius: 50%;
+    }
+</style>
+
+<div class="main">
+
+    <section class="searchBanner">
+        <div class="banner-text-item">
+            <form method="GET" action="{% url 'search' %}" class="form">
+                <input type="text" list="pickup" name="pickup" id="pickup" placeholder="Leaving From" required>
+                <input type="text" list="drop" name="drop" id="drop" placeholder="Going To" required>
+                <input type="date" class="date" name="date" id="date" required>
+                <!-- <input type="time" class="time" name="time" id="time" required> -->
+                <button type="submit" class="book">Search</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- cards -->
+    <div class="mainContainer">
+
+        <div class="ridesContainer">
+
+            {% if rides %}
+            {% for ride in rides %}
+            <div class="cards">
+                <div class="card-item">
+                    <div class="card-info">
+                        <div style="display: flex; justify-content: space-between;">
+                            <h3 class="card-title">{{ride.pickup}}</h3>
+                            <b>
+                                <p style="font-size: 21px;">₹{{ride.price}}</p>
+                            </b>
+                        </div>
+                        <div class="line"></div>
+                        <h3 class="card-title" style="margin-bottom: 1.5rem;">{{ride.drop}}</h3>
+                        <p><b>Date:</b> {{ride.date}}</p>
+                        <p><b>Time:</b> {{ride.time}}</p>
+                        <p><b>Seats available:</b> {{ride.seats}}</p>
+                        <div class="username">
+                            <img src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o="
+                                alt="">
+                            <div>
+                                <h3 class="card-title">{{request.user.name}}</h3>
+                                <b><p>{{ride.phone}}</p></b>
+                            </div>
+                        </div>
+                        <button class="bookBtn">Book Now</button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <h3>Sorry! No results found for your search. Make new search.</h3>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

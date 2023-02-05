@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% block title %} Publish a ride {% endblock %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    .publishRideContainer {
+        color: #384047;
+    }
+
+    form {
+        max-width: 300px;
+        margin: 20px auto;
+        padding: 20px 20px;
+        background: #f4f7f8;
+        border-radius: 8px;
+    }
+
+    .publishRideContainer a {
+        color: #fff;
+        font-weight: 400;
+        text-decoration: none;
+        font-size: 26px;
+    }
+
+    .publishRideContainer h1 {
+        margin: 0 0 30px 0;
+        text-align: center;
+    }
+
+    .publishRideContainer input[type="text"],
+    input[type="date"],
+    input[type="datetime"],
+    input[type="number"],
+    input[type="time"] {
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        font-size: 16px;
+        height: auto;
+        margin: 0;
+        outline: 0;
+        padding: 15px;
+        width: 100%;
+        background-color: #e8eeef;
+        color: #606970;
+        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+        margin-bottom: 30px;
+    }
+
+    .publishRideContainer button {
+        padding: 19px 39px 18px 39px;
+        color: #FFF;
+        background-color: #4bc970;
+        font-size: 18px;
+        text-align: center;
+        font-style: normal;
+        border-radius: 5px;
+        width: 100%;
+        border: 1px solid #3ac162;
+        border-width: 1px 1px 3px;
+        box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+        margin-bottom: 10px;
+        cursor: pointer;
+    }
+
+    .publishRideContainer fieldset {
+        margin-bottom: 30px;
+        border: none;
+    }
+
+    .publishRideContainer label {
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    @media screen and (min-width: 480px) {
+        .publishRideContainer form {
+            max-width: 480px;
+        }
+    }
+</style>
+
+<div class="publishRideContainer">
+
+    <form action="" method="post">
+
+        {% csrf_token %}
+
+        <h1>Publish a ride</h1>
+
+        <fieldset>
+            <label for="pickup">Pickup Location</label>
+            <input type="text" id="pickup" name="pickup">
+
+            <label for="drop">Drop Location</label>
+            <input type="text" id="drop" name="drop">
+
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date">
+
+            <label for="time">Time</label>
+            <input type="time" id="time" name="time">
+
+            <label for="seats">Seats Available</label>
+            <input type="number" id="seats" name="seats">
+
+            <label for="price">Price</label>
+            <input type="number" id="price" name="price">
+
+            <label for="phone">Phone Number</label>
+            <input type="number" id="phone" name="phone">
+
+        </fieldset>
+
+        <button type="submit">Publish</button>
+    </form>
+</div>
+
+{% endblock %}

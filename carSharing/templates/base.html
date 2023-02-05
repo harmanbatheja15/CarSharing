@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Car Sharing | {% block title %} {% endblock %}</title>
+    <link rel="icon" href="{% static 'favicon.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'favicon.png' %}" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+</head>
+
+<body>
+
+    <!--===========Nav Bar=================-->
+    <nav class="navbar">
+        <div class="container">
+
+            <div class="navbar-header">
+                <button class="navbar-toggler" data-toggle="open-navbar1">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <a href="/">
+                    <h4>Car <span>Sharing</span></h4>
+                </a>
+            </div>
+
+            <div class="navbar-menu" id="open-navbar1">
+                <ul class="navbar-nav">
+
+                    <li {% if '/' == request.path %} class="active" {% else %} class="" {% endif %}>
+                        <a href="/">Home</a>
+                    </li>
+
+                    <li>
+                        <a href="/search">Search</a>
+                    </li>
+
+                    <li {% if '/publishRide' == request.path %} class="active" {% else %} class="" {% endif %}>
+                        <a href="/publishRide">Publish a Ride</a>
+                    </li>
+
+                    <li {% if '/signup' == request.path or '/login' == request.path or '/profile' == request.path %} class="navbar-dropdown active" {% else %} class="navbar-dropdown" {% endif %}>
+
+                        <a href="#" class="dropdown-toggler userName" data-dropdown="account">
+                            {% if request.user.is_authenticated %}
+                            {{request.user.name}} <i class="fa fa-angle-down"></i>
+                            {% else %}
+                            Account <i class="fa fa-angle-down"></i>
+                            {% endif %}
+                        </a>
+
+                        <ul class="dropdown" id="account">
+
+                            {% if request.user.is_authenticated %}
+
+                            <li>
+                                <a href="/profile">Profile</a>
+                            </li>
+                            
+                            <li>
+                                <a href="/signout">Sign Out</a>
+                            </li>
+
+                            {% else %}
+
+                            <li>
+                                <a href="/signup">Sign Up</a>
+                            </li>
+                            
+                            <li>
+                                <a href="/login">Log In</a>
+                            </li>
+
+                            {% endif %}
+
+                        </ul>
+
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% block content %} {% endblock %}
+
+    <!--===========Footer=================-->
+    <div class="footer">
+        <div class="links">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/search">Search</a></li>
+                <li><a href="/publishRide">Publish a ride</a></li>
+                <li><a href="/signup">Sign Up</a></li>
+                <li><a href="/login">Log In</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="links">
+            <h3>Support</h3>
+            <ul>
+                <li><a href="#">Frequently Asked Questions</a></li>
+                <li><a href="#">Report a Payment Issue</a></li>
+                <li><a href="#">Terms & Conditions</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="{% static 'app.js' %}"></script>
+
+</body>
+
+</html>
